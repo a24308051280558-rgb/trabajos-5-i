@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Configuración de caracteres y codificación básica -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale $=1.0^{\prime\prime}>$
+    
+    <!-- Título de la pestaña en el navegador -->
+    <title>Formularios en HTML</title>
+
+    <!-- Libreria de iconos en linea -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
+</head>
+<body>
+    <!-- Encabezado principal y descripción general -->
+    <h1>Formularios</h1>
+    <p>Un formulario permite al visitante cargar datos y que sean enviados al servidor.</p>
+    <p>El HTML no tiene la responsabilidad de registrar los datos en el servidor,
+    esta actividad se delega a traves de un lenguaje que se ejecute en el servidor (PHP,
+    ASP, ASP.NET, Node, etc.)
+    </p>
+
+    <!-- Formulario básico de entrada de texto -->
+    <h2>Ejemplo basico</h2>
+    <form action="" method="post">
+        Ingresa tu nombre:
+        <input type="text" name="nombre" size $=^{\prime\prime}20^{\prime\prime}>$
+        <br>
+        <input type="submit" value="enviar">
+    </form>
+
+    <!-- Formulario para gestión de contraseñas y login -->
+    <h2>Formulario para contraseñas</h2>
+    <form action="" method="post">
+        Ingresa tu usuario:
+        <input type="text" name="usuario">
+        
+        <!-- Campo para ocultar caracteres de contraseña -->
+        Ingresa tu contraseña:
+        <input type="password" name="pass">
+        <br>
+        <input type="submit" value="enviar">
+        <input type="reset" value="borrar">
+    </form>
+
+    <!-- Formulario con campo de texto multilínea -->
+    <h2>Formulario con text area</h2>
+    <form action="" method="post">
+        Ingresa tu nombre:
+        <input type="text" name="nombre">
+        <br>
+        
+        <!-- Campo para recolección de correo electrónico -->
+        Ingresa tu correo:
+        <input type="email" name="correo">
+        <br>
+        
+        <!-- Área para escribir comentarios largos -->
+        Ingresa tus comentarios:
+        <textarea name="comentarios" rows $=^{\prime\prime}1^{\prime\prime}$ cols="10"></textarea>
+        <br>
+        <input type="submit" value="enviar">
+        <input type="reset" value="borrar">
+    </form>
+
+    <!-- Formulario con casillas de verificación múltiples -->
+    <h2>Formularios con checkbox</h2>
+    <form action="" method="post">
+        Ingresa tu nombre:
+        <input type="text" name="nombre">
+        <br>
+        
+        <!-- Lista de opciones seleccionables independientes -->
+        Selecciona los lenguajes que conozcas:
+        <br>
+        <input type="checkbox" name="Java">Java <br>
+        <input type="checkbox" name="Python"> Python <br>
+        <input type="checkbox" name="C#">C# <br>
+        <input type="checkbox" name="Flutter"> Flutter <br>
+    </form>
+
+    <!-- Formulario con botones de opción única (Radiobutton) -->
+    <h2>Formularios con Radioboton</h2>
+    <form action="" method="post">
+        Ingresa tu nombre:
+        <input type="text" name="nombre">
+        <br>
+        
+        <!-- Selección exclusiva mediante mismo atributo 'name' -->
+        Selecciona el maximo de estudios que tienes:
+        <br>
+        <input type="radio" name="estudios" value="1">Sin estudios <br>
+        <input type="radio" name="estudios" value="2">Primaria <br>
+        <input type="radio" name="estudios" value="3">Secundaria <br>
+        <input type="radio" name="estudios" value="4">Preparatoria <br>
+        <input type="submit" value="enviar">
+        <input type="reset" value="borrar">
+    </form>
+
+    <!-- Menú desplegable de selección -->
+    <h2>Formularios con seleccion</h2>
+    <form action="" method="post">
+        Ingresa tu nombre:
+        <input type="text" name="nombre">
+        <br>
+        
+        <!-- Lista desplegable con varias opciones -->
+        Selecciona tu pais:
+        <select name="pais">
+            <option value="1">Argentina</option>
+            <option value="2">España</option>
+            <option value="3">Mexico</option>
+            <option value="4">Guatemala</option>
+            <option value="5">Honduras</option>
+            <option value="6">El Salvador</option>
+            <option value="7">Venezuela</option>
+            <option value="8">Colombia</option>
+        </select>
+        <br>
+        <input type="submit" value="enviar">
+        <input type="reset" value="borrar">
+    </form>
+
+    <!-- Botones con elementos de icono incrustados -->
+    <h2>Formulario con botones</h2>
+    <form action="" method="post">
+        Ingresa tu nombre:
+        <input type="text" name="nombre">
+        <br>
+        
+        <!-- Botón de envío con icono de FontAwesome -->
+        <button type="submit">Enviar <i class="fa-regular fa-paper-plane"></i></button>
+        <button type="reset">Borrar <i class="fa fa-trash"></i></button>
+    </form>
+
+    <!-- Formulario de subida de archivos adjuntos -->
+    <h2>Formulario con archivos</h2>
+    <form action="" method="post">
+        Ingresa tu nombre:
+        <input type="text" name="nombre">
+        <br>
+        
+        <!-- Campo para adjuntar archivos desde el equipo -->
+        <input type="file" name="archivo">
+        <br>
+        <button type="submit">Enviar <i class="fa-regular fa-paper-plane"></i></button>
+        <button type="reset">Borrar <i class="fa fa-trash"></i></button>
+    </form>
+
+    <!-- Campos de envío de información oculta -->
+    <h2>Formulario con campos ocultos</h2>
+    <form action="" method="post">
+        <!-- Input no visible para el usuario -->
+        <input type="hidden" name="hora" value $=^{\prime\prime}3:30^{\prime\prime}>$
+        Ingresa tu nombre:
+        <input type="text" name="nombre">
+        <br>
+        <button type="submit">Enviar <i class="fa-regular fa-paper-plane"></i></button>
+        <button type="reset">Borrar <i class="fa fa-trash"></i></button>
+    </form>
+
+    <!-- Agrupamiento temático de campos usando fieldset -->
+    <h2>Formularios con agrupamiento</h2>
+    <form action="" method="post">
+        <!-- Primer grupo de datos: Personales -->
+        <fieldset>
+            <legend>Datos personales</legend>
+            Nombre y apellido:
+            <input type="text" name="nombre_apellido"><br>
+            Documento valido:
+            <input type="file" name="documento"><br>
+            Fecha de nacimiento:
+            <input type="date" name="fecha_nacimiento">
+        </fieldset>
+        
+        <!-- Segundo grupo de datos: Académicos -->
+        <fieldset>
+            <legend>Datos de estudio:</legend>
+            Nombre de la escuela:
+            <input type="text" name="escuela"><br>
+            Certificado valido:
+            <input type="file" name="certificado"><br>
+            Fecha de egreso:
+            <input type="date" name="fecha_egreso">
+        </fieldset>
+        <br>
+        <button type="submit">Enviar <i class="fa-regular fa-paper-plane"></i></button>
+        <button type="reset">Borrar <i class="fa fa-trash"></i></button>
+    </form>
+
+    <!-- Restricciones de atributos en elementos de formulario -->
+    <h2>Formulario con limitaciones</h2>
+    <form action="" method="post">
+        Ingresa tu nombre:
+        <!-- Desahbilitacion de campo -->
+        <input type="text" name="nombre" disabled><br>
+        
+        <!-- Limitacion de caracteres -->
+        Contraseña:
+        <input type="password" name="pass" maxlength="5"><br>
+        
+        <!-- Solo lectura -->
+        Comentarios:
+        <textarea name="comentarios" readonly>
+            Este es mi comentario y no se puede borrar
+        </textarea><br>
+    </form>
+</body>
+</html>
