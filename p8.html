@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sitio Web - Estructura Base</title>
+    <style>
+        /* Estilos generales de diseño */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: #333;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+        }
+
+        /* 1. ENCABEZADO (Header) */
+        header {
+            background-color: #fff;
+            padding: 15px 5%;
+            border-bottom: 2px solid #111;
+        }
+
+        .top-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: #666;
+            font-family: sans-serif;
+            margin-bottom: 10px;
+        }
+
+        .logo {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 10px 0;
+        }
+
+        /* 2. BARRA DE NAVEGACIÓN (Nav) */
+        nav {
+            background-color: #fff;
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #111;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav ul li a {
+            display: block;
+            padding: 10px 18px;
+            text-decoration: none;
+            color: #111;
+            font-family: sans-serif;
+            font-size: 0.9rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: default; /* Solo diseño, no interactivo */
+        }
+
+        /* 3. CUERPO DEL SITIO (Main / Layout principal) */
+        main {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+
+        /* Sección de contenidos / artículos */
+        .seccion-contenido {
+            background: #fff;
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+            margin-bottom: 20px;
+        }
+
+        .seccion-contenido h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        /* Formulario estático */
+        .sec-formulario {
+            background-color: #fff;
+            padding: 25px;
+            border: 1px solid #ccc;
+            font-family: sans-serif;
+            height: fit-content;
+        }
+
+        .sec-formulario h3 {
+            font-family: 'Georgia', serif;
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #111;
+            padding-bottom: 5px;
+        }
+
+        .sec-formulario p {
+            font-size: 0.9rem;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-group input, 
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+        }
+
+        .btn-diseno {
+            width: 100%;
+            padding: 12px;
+            background-color: #111;
+            color: #fff;
+            border: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-radius: 4px;
+            text-align: center;
+            cursor: default;
+        }
+
+        /* 4. PIE DE PÁGINA (Footer) */
+        footer {
+            background-color: #111;
+            color: #fff;
+            text-align: center;
+            padding: 25px 20px;
+            margin-top: 40px;
+            font-family: sans-serif;
+            font-size: 0.85rem;
+        }
+
+        footer nav ul {
+            background: transparent;
+            margin-bottom: 15px;
+            border: none;
+        }
+
+        footer nav ul li a {
+            color: #ccc;
+            font-size: 0.8rem;
+        }
+
+        /* Responsivo básico */
+        @media (max-width: 768px) {
+            main {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. ENCABEZADO -->
+    <header>
+        <div class="top-header">
+            <span>Fecha del Día</span>
+            <span>Edición Digital</span>
+        </div>
+        <div class="logo">
+            Nombre del Sitio Web
+        </div>
+    </header>
+
+    <!-- 2. BARRA DE NAVEGACIÓN -->
+    <nav>
+        <ul>
+            <li><a href="#">Inicio</a></li>
+            <li><a href="#">Sección 1</a></li>
+            <li><a href="#">Sección 2</a></li>
+            <li><a href="#">Sección 3</a></li>
+            <li><a href="#">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <!-- 3. CUERPO DEL SITIO -->
+    <main>
+        <!-- Contenido principal -->
+        <section>
+            <article class="seccion-contenido">
+                <h2>Título Principal de la Noticia o Artículo</h2>
+                <p>Texto de ejemplo que representa el contenido principal del sitio web. Esta sección está diseñada para mostrar la maquetación y la distribución del texto dentro de la página visual.</p>
+            </article>
+
+            <article class="seccion-contenido">
+                <h2>Título Secundario o Subsección</h2>
+                <p>Texto secundario para ilustrar cómo se acomodan los bloques de lectura dentro del cuerpo principal del sitio.</p>
+            </article>
+        </section>
+
+        <!-- Formulario (Solo maquetación visual) -->
+        <aside class="sec-formulario">
+            <h3>Formulario de Registro</h3>
+            <p>Complete la información requerida a continuación:</p>
+            
+            <div>
+                <div class="form-group">
+                    <label>Nombre completo:</label>
+                    <input type="text" placeholder="Escriba su nombre" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label>Correo electrónico:</label>
+                    <input type="email" placeholder="ejemplo@correo.com" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label>Tipo de usuario / Opciones:</label>
+                    <select disabled>
+                        <option>Opción 1</option>
+                        <option>Opción 2</option>
+                        <option>Opción 3</option>
+                    </select>
+                </div>
+
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" disabled>
+                    <label>Acepto los términos y condiciones</label>
+                </div>
+
+                <div class="btn-diseno">Enviar Información</div>
+            </div>
+        </aside>
+    </main>
+
+    <!-- 4. PIE DE PÁGINA -->
+    <footer>
+        <nav>
+            <ul>
+                <li><a href="#">Enlace 1</a></li>
+                <li><a href="#">Enlace 2</a></li>
+                <li><a href="#">Enlace 3</a></li>
+            </ul>
+        </nav>
+        <p>Hernandez Heredia Evan Renato, No.Control;0558,5-i</p>
+    </footer>
+
+</body>
+</html>
