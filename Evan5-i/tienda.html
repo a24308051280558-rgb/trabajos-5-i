@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFL Store - Tienda</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        nflRed: '#FF0000',
+                        nflRedDark: '#CC0000',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-100 font-sans text-gray-800 min-h-screen flex flex-col">
+
+    <!-- BARRA DE NAVEGACIÓN -->
+    <nav class="bg-nflRed text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <img src="img/logo.png" alt="Logo NFL Shop" class="w-12 h-12 rounded-full object-cover border-2 border-white bg-white">
+                <span class="font-black text-2xl tracking-wider">NFL SHOP</span>
+            </div>
+            <div class="flex items-center space-x-2 md:space-x-4 text-sm font-semibold">
+                <a href="index.html" class="px-3 py-2 rounded hover:bg-nflRedDark transition">Inicio</a>
+                <a href="equipos.html" class="px-3 py-2 bg-nflRedDark rounded transition">Equipos</a>
+                <a href="cuenta.html" class="px-3 py-2 rounded hover:bg-nflRedDark transition"><i class="fas fa-user mr-1"></i> Cuenta</a>
+                
+                <!-- BOTÓN CARRITO -->
+                <button onclick="toggleCarrito()" class="bg-black px-3 py-2 rounded-full hover:bg-gray-900 transition flex items-center space-x-2">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cant-carrito" class="bg-nflRed px-2 py-0.5 rounded-full text-xs font-bold">0</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="flex-grow max-w-7xl mx-auto p-4 w-full space-y-8">
+        
+        <!-- REGRESAR A EQUIPOS -->
+        <a href="equipos.html" class="inline-flex items-center text-sm font-bold text-nflRed hover:underline">
+            <i class="fas fa-arrow-left mr-2"></i> Volver a Equipos
+        </a>
+
+        <!-- SECCIÓN CARRITO DESPLEGABLE -->
+        <section id="sec-carrito" class="hidden bg-white p-6 rounded-lg shadow-xl border-t-4 border-nflRed">
+            <h2 class="text-2xl font-black text-gray-800 mb-4 flex items-center justify-between">
+                <span><i class="fas fa-shopping-basket text-nflRed mr-2"></i> Tu Carrito de Compras</span>
+                <button onclick="vaciarCarrito()" class="text-xs bg-red-100 text-red-600 px-3 py-1 rounded hover:bg-red-200">Vaciar Todo</button>
+            </h2>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="border-b bg-gray-50 text-gray-600 text-xs uppercase">
+                            <th class="p-3">Producto</th>
+                            <th class="p-3">Precio</th>
+                            <th class="p-3">Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lista-carrito" class="divide-y text-sm"></tbody>
+                </table>
+            </div>
+
+            <div class="flex justify-between items-center mt-6 pt-4 border-t">
+                <span class="text-lg font-bold">Total a Pagar: <span id="total-precio" class="text-nflRed font-black">$0 MXN</span></span>
+                <button onclick="abrirCheckout()" class="bg-nflRed text-white px-6 py-2 rounded-lg font-bold hover:bg-nflRedDark transition">Proceder al Pago</button>
+            </div>
+        </section>
+
+        <!-- ENCABEZADO Y PRODUCTOS DE LOS 10 EQUIPOS -->
+        <div id="catalogo-equipos" class="space-y-12">
+
+            <!-- KANSAS CITY CHIEFS -->
+            <div id="chiefs" class="equipo-seccion space-y-4">
+                <h2 class="text-3xl font-black text-nflRed border-b pb-2">Tienda Oficial: Kansas City Chiefs</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-4 rounded-lg shadow border flex flex-col justify-between">
+                        <div>
+                            <img src="img/chiefs_p1.jpg" alt="Jersey Chiefs" class="w-full h-48 object-cover rounded mb-2">
+                            <h3 class="font-bold text-lg">Jersey Local Mahomes #15</h3>
+                            <p class="text-xl font-extrabold text-nflRed mt-2">$2,499 MXN</p>
+                        </div>
+                        <button onclick="agregarAlCarrito('Jersey Local Mahomes #15', 2499)" class="w-full mt-4 bg-nflRed text-white py-2 rounded font-bold hover:bg-nflRedDark transition">+ Agregar al Carrito</button>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow border flex flex-col justify-between">
+                        <div>
+                            <img src="img/chiefs_p2.jpg" alt="Gorra Chiefs" class="w-full h-48 object-cover rounded mb-2">
+                            <h3 class="font-bold text-lg">Gorra Red Kingdom</h3>
+                            <p class="text-xl font-extrabold text-nflRed mt-2">$899 MXN</p>
+                        </div>
+                        <button onclick="agregarAlCarrito('Gorra Red Kingdom', 899)" class="w-full mt-4 bg-nflRed text-white py-2 rounded font-bold hover:bg-nflRedDark transition">+ Agregar al Carrito</button>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow border flex flex-col justify-between">
+                        <div>
+                            <img src="img/chiefs_p3.jpg" alt="Sudadera Chiefs" class="w-full h-48 object-cover rounded mb-2">
+                            <h3 class="font-bold text-lg">Sudadera Champ Hoodie</h3>
+                            <p class="text-xl font-extrabold text-nflRed mt-2">$1,699 MXN</p>
+                        </div>
+                        <button onclick="agregarAlCarrito('Sudadera Champ Hoodie', 1699)" class="w-full mt-4 bg-nflRed text-white py-2 rounded font-bold hover:bg-nflRedDark transition">+ Agregar al Carrito</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SAN FRANCISCO 49ERS -->
+            <div id="49ers" class="equipo-seccion space-y-4">
+                <h2 class="text-3xl font-black text-nflRed border-b pb-2">Tienda Oficial: San Francisco 49ers</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-4 rounded-lg shadow border flex flex-col justify-between">
+                        <div>
+                            <img src="img/49ers_p1.jpg" alt="Jersey 49ers" class="w-full h-48 object-cover rounded mb-2">
+                            <h3 class="font-bold text-lg">Jersey Purdy #13</h3>
+                            <p class="text-xl font-extrabold text-nflRed mt-2">$2,499 MXN</p>
+                        </div>
+                        <button onclick="agregarAlCarrito('Jersey Purdy #13', 2499)" class="w-full mt-4 bg-nflRed text-white py-2 rounded font-bold hover:bg-nflRedDark transition">+ Agregar al Carrito</button>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow border flex flex-col justify-between">
+                        <div>
+                            <img src="img/49ers_p2.jpg" alt="Gorra 49ers" class="w-full h-48 object-cover rounded mb-2">
+                            <h3 class="font-bold text-lg">Gorra Retro Gold</h3>
+                            <p class="text-xl font-extrabold text-nflRed mt-2">$899 MXN</p>
+                        </div>
+                        <button onclick="agregarAlCarrito('Gorra Retro Gold', 899)" class="w-full mt-4 bg-nflRed text-white py-2 rounded font-bold hover:bg-nflRedDark transition">+ Agregar al Carrito</button>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow border flex flex-col justify-between">
+                        <div>
+                            <img src="img/49ers_p3.jpg" alt="Chamarra 49ers" class="w-full h-48 object-cover rounded mb-2">
+                            <h3 class="font-bold text-lg">Chamarra Sideline</h3>
+                            <p class="text-xl font-extrabold text-nflRed mt-2">$1,999 MXN</p>
+                        </div>
+                        <button onclick="agregarAlCarrito('Chamarra Sideline', 1999)" class="w-full mt-4 bg-nflRed text-white py-2 rounded font-bold hover:bg-nflRedDark transition">+ Agregar al Carrito</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DALLAS COWBOYS -->
+            <div id="cowboys" class="equipo-seccion space-y-4">
+                <h2 class="text-3xl font-black text-nflRed border-b pb-2">Tienda Oficial: Dallas Cowboys</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-4 rounded-lg shadow border flex flex-col justify-between">
+                        <div>
+                            <img src="img/cowboys_p1.jpg" alt="Jersey Cowboys" class="w-full h-48 object-cover rounded mb-2">
+                            <h3 class="font-bold text-lg">Jersey Prescott #4</h3>
+                            <p class="text-xl font-extrabold text-nflRed mt-2">$2,499 MXN</p>
+                        </div>
+                        <button onclick="agregarAlCarrito('Jersey Prescott #4', 2499)" class="w-full mt-4 bg-nflRed text-white py-2 rounded font-bold hover:bg-nflRedDark transition">+ Agregar al Carrito</button>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow border flex flex-col justify-between">
+                        <div>
+                            <img src="img/cowboys_p2.jpg" alt="Gorra Cowboys" class="w-full h-48 object-cover rounded mb-2">
+                            <h3 class="font-bold text-lg">Gorra Star Classic</h3>
+                            <p class="text-xl font-extrabold text-nflRed mt-2">$899 MXN</p>
+                        </div>
+                        <button onclick="agregarAlCarrito('Gorra Star Classic', 899)" class="w-full mt-4 bg-nflRed text-white py-2 rounded font-bold hover:bg-nflRedDark transition">+ Agregar al Carrito</button>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow border flex flex-col justify-between">
+                        <div>
+                            <img src="img/cowboys_p3.jpg" alt="Playera Cowboys" class="w-full h-48 object-cover rounded mb-2">
+                            <h3 class="font-bold text-lg">Playera Training Cotton</h3>
+                            <p class="text-xl font-extrabold text-nflRed mt-2">$699 MXN</p>
+                        </div>
+                        <button onclick="agregarAlCarrito('Playera Training Cotton', 699)" class="w-full mt-4 bg-nflRed text-white py-2 rounded font-bold hover:bg-nflRedDark transition">+ Agregar al Carrito</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PITTSBURGH STEELERS -->
+            <div id="steelers" class="equipo-seccion space-y-4">
+                <h2 class="text-3xl font-black text-nflRed border-b pb-2">Tienda Oficial: Pittsburgh Steelers</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-4 rounded-lg shadow border flex flex-col justify-between">
+                        <div>
+                            <img src="img/steelers_p1.jpg" alt="Jersey Steelers" class="w-full h-48 object-cover rounded mb-2">
+                            <h3 class="font-bold text-lg">Jersey Watt #90</h3>
+                            <p class="text-xl font-extrabold text-nflRed mt-2">$2,499 MXN</p>
+                        </div>
+                        <button onclick="agregarAlCarrito('Jersey Watt #90', 2499)" class="w-full mt-4 bg-nflRed text-white py-2 rounded font-bold hover:bg-nflRedDark transition">+ Agregar al Carrito</button>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow border flex flex-col justify-between">
+                        <div>
+                            <img src="img/steelers_p2.jpg" alt="Gorra Steelers" class="w-full h-48 object-cover rounded mb-2">
+                            <h3 class="font-bold text-lg">Gorra Black & Gold</h3>
+                            <p class="text-xl font-extrabold text-nflRed mt-2">$899 MXN</p>
+                        </div>
+                        <button onclick="agregarAlCarrito('Gorra Black & Gold', 899)" class="w-full mt-4 bg-nflRed text-white py-2 rounded font-bold hover:bg-nflRedDark transition">+ Agregar al Carrito</button>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow border flex flex-col justify-between">
+                        <div>
+                            <img src="img/steelers_p3.jpg" alt="Terrible Towel" class="w-full h-48 object-cover rounded mb-2">
+                            <h3 class="font-bold text-lg">Terrible Towel Oficial</h3>
+                            <p class="text-xl font-extrabold text-nflRed mt-2">$499 MXN</p>
+                        </div>
+                        <button onclick="agregarAlCarrito('Terrible Towel Oficial', 499)" class="w-full mt-4 bg-nflRed text-white py-2 rounded font-bold hover:bg-nflRedDark transition">+ Agregar al Carrito</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PHILADELPHIA EAGLES -->
+            <div id="eagles" class="equipo-seccion space-y-4">
+                <h2 class="text-3xl font-black text-nflRed border-b pb-2">Tienda Oficial: Philadelphia Eagles</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-4 rounded-lg shadow border flex flex-col justify-between">
+                        <div>
+                            <img src="img/eagles_p1.jpg" alt="Jersey Eagles" class="w-full h-48 object-cover rounded mb-2">
+                            <h3 class="font-bold text-lg">Jersey Hurts #1</h3>
+                            <p class="text-xl font-extrabold text-nflRed mt-2">$2,499 MXN</p>
+                        </div>
+                        <button onclick="agregarAlCarrito('Jersey Hurts #1', 2499)" class="w-full mt-4 bg-nflRed text-white py-2 rounded font-bold hover:bg-nflRedDark transition">+ Agregar al Carrito</button>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow border flex flex-col justify-between">
+                        <div>
+                            <img src="img/eagles_p2.jpg" alt="Gorra Eagles" class="w-full h-48 object-cover rounded mb-2">
+                            <h3 class="font-bold text-lg">Gorra Midnight Green</h3>
+                            <p class="text-xl font-extrabold text-nflRed mt-2">$899 MXN</p>
+                        </div>
+                        <button onclick="agregarAlCarrito('Gorra Midnight Green', 899)" class="w-full mt-4 bg-nflRed text-white py-2 rounded font-bold hover:bg-nflRedDark transition">+ Agregar al Carrito</button>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow border flex flex-col justify-between">
+                        <div>
+                            <img src="img/eagles_p3.jpg" alt="Sudadera Eagles" class="w-full h-48 object-cover rounded mb-2">
+                            <h3 class="font-bold text-lg">Sudadera Fly Eagles Fly</h3>
+                            <p class="text-xl font-extrabold text-nflRed mt-2">$1,599 MXN</p>
+                        </div>
+                        <button onclick="agregarAlCarrito('Sudadera Fly Eagles Fly', 1599)" class="w-full mt-4 bg-nflRed text-white py-2 rounded font-bold hover:bg-nflRedDark transition">+ Agregar al Carrito</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MIAMI DOLPHINS -->
+            <div id="dolphins" class="equipo-seccion space-y-4">
+                <h2 class="text-3xl font-black text-nflRed border-b pb-2">Tienda Oficial: Miami Dolphins</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-4 rounded-lg shadow border flex flex-col justify-between">
+                        <div>
+                            <img src="img/dolphins_p1.jpg" alt="Jersey Dolphins" class="w-full h-48 object-cover rounded mb-2">
+                            <h3 class="font-bold text-lg">Jersey Tagovailoa #1</h3>
+                            <p class="text-xl font-extrabold text-nflRed mt-2">$2,499 MXN</p>
+                        </div>
+                        <button onclick="agregarAlCarrito('Jersey Tagovailoa #1', 2499)" class="w-full mt-4 bg-nflRed text-white py-2 rounded font-bold hover:bg-nflRedDark transition">+ Agregar al Carrito</button>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow border flex flex-col justify-between">
+                        <div>
+                            <img src="img/dolphins_p2.jpg" alt="Gorra Dolphins" class="w-full h-48 object-cover rounded mb-2">
+                            <h3 class="font-bold text-lg">Gorra Aqua Vice</h3>
+                            <p class="text-xl font-extrabold text-nflRed mt-2">$899 MXN</p>
+                        </div>
+                        <button onclick="agregarAlCarrito('Gorra Aqua Vice', 899)" class="w-full mt-4 bg-nflRed text-white py-2 rounded font-bold hover:bg-nflRedDark transition">+ Agregar al Carrito</button>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow border flex flex-col justify-between">
+                        <div>
+                            <img src="img/dolphins_p3.jpg" alt="Jersey Hill" class="w-full h-48 object-cover rounded mb-2">
+                            <h3 class="font-bold text-lg">Jersey Tyreek Hill #10</h3>
+                            <p class="text-xl font-extrabold text-nflRed mt-2">$2,499 MXN</p>
+                        </div>
+                        <button onclick="agregarAlCarrito('Jersey Tyreek Hill #10', 2499)" class="w-full mt-4 bg-nflRed text-white py-2 rounded font-bold hover:bg-nflRedDark transition">+ Agregar al Carrito</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GREEN BAY PACKERS -->
+            <div id="packers" class="equipo-seccion space-y-4">
+                <h2 class="text-3xl font-black text-nflRed border-b pb-2">Tienda Oficial: Green Bay Packers</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-4 rounded-lg shadow border flex flex-col justify-between">
+                        <div>
+                            <img src="img/packers_p1.jpg" alt="Jersey Packers" class="w-full h-48 object-cover rounded mb-2">
+                            <h3 class="font-bold text-lg">Jersey Love #10</h3>
+                            <p class="text-xl font-extrabold text-nflRed mt-2">$2,499 MXN</p>
+                        </div>
+                        <button onclick="agregarAlCarrito('Jersey Love #10', 2499)" class="w-full mt-4 bg-nflRed text-white py-2 rounded font-bold hover:bg-nflRedDark transition">+ Agregar al Carrito</button>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow border flex flex-col justify-between">
+                        <div>
+                            <img src="img/packers_p2.jpg" alt="Gorra Packers" class="w-full h-48 object-cover rounded mb-2">
+                            <h3 class="font-bold text-lg">Gorra Cheesehead Snapback</h3>
+                            <p class="text-xl font-extrabold text-nflRed mt-2">$899 MXN</p>
+                        </div>
+                        <button onclick="agregarAlCarrito('Gorra Cheesehead Snapback', 899)" class="w-full mt-4 bg-nflRed text-white py-2 rounded font-bold hover:bg-nflRedDark transition">+ Agregar al Carrito</button>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow border flex flex-col justify-between">
+                        <div>
+                            <img src="img/packers_p3.jpg" alt="Gorro Packers" class="w-full h-48 object-cover rounded mb-2">
+                            <h3 class="font-bold text-lg">Gorro Tejido para Frío</h3>
+                            <p class="text-xl font-extrabold text-nflRed mt-2">$599 MXN</p>
+                        </div>
+                        <button onclick="agregarAlCarrito('Gorro Tejido para Frío', 599)" class="w-full mt-4 bg-nflRed text-white py-2 rounded font-bold hover:bg-nflRedDark transition">+ Agregar al Carrito</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LAS VEGAS RAIDERS -->
+            <div id="raiders" class="equipo-seccion space-y-4">
+                <h2 class="text-3xl font-black text-nflRed border-b pb-2">Tienda Oficial: Las Vegas Raiders</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-4 rounded-lg shadow border flex flex-col justify-between">
+                        <div>
+                            <img src="img/raiders_p1.jpg" alt="Jersey Raiders" class="w-full h-48 object-cover rounded mb-2">
+                            <h3 class="font-bold text-lg">Jersey Crosby #98</h3>
+                            <p class="text-xl font-extrabold text-nflRed mt-2">$2,499 MXN</p>
+                        </div>
+                        <button onclick="agregarAlCarrito('Jersey Crosby #98', 2499)" class="w-full mt-4 bg-nflRed text-white py-2 rounded font-bold hover:bg-nflRedDark transition">+ Agregar al Carrito</button>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow border flex flex-col justify-between">
+                        <div>
+                            <img src="img/raiders_p2.jpg" alt="Gorra Raiders" class="w-full h-48 object-cover rounded mb-2">
+                            <h3 class="font-bold text-lg">Gorra Silver & Black</h3>
+                            <p class="text-xl font-extrabold text-nflRed mt-2">$899 MXN</p>
+                        </div>
+                        <button onclick="agregarAlCarrito('Gorra Silver & Black', 899)" class="w-full mt-4 bg-nflRed text-white py-2 rounded font-bold hover:bg-nflRedDark transition">+ Agregar al Carrito</button>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow border flex flex-col justify-between">
+                        <div>
+                            <img src="img/raiders_p3.jpg" alt="Sudadera Raiders" class="w-full h-48 object-cover rounded mb-2">
+                            <h3 class="font-bold text-lg">Sudadera Nation Hoodie</h3>
+                            <p class="text-xl font-extrabold text-nflRed mt-2">$1,699 MXN</p>
+                        </div>
+                        <button onclick="agregarAlCarrito('Sudadera Nation Hoodie', 1699)" class="w-full mt-4 bg-nflRed text-white py-2 rounded font-bold hover:bg-nflRedDark transition">+ Agregar al Carrito</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BALTIMORE RAVENS -->
+            <div id="ravens" class="equipo-seccion space-y-4">
+                <h2 class="text-3xl font-black text-nflRed border-b pb-2">Tienda Oficial: Baltimore Ravens</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-4 rounded-lg shadow border flex flex-col justify-between">
+                        <div>
+                            <img src="img/ravens_p1.jpg" alt="Jersey Ravens" class="w-full h-48 object-cover rounded mb-2">
+                            <h3 class="font-bold text-lg">Jersey Lamar Jackson #8</h3>
+                            <p class="text-xl font-extrabold text-nflRed mt-2">$2,499 MXN</p>
+                        </div>
+                        <button onclick="agregarAlCarrito('Jersey Lamar Jackson #8', 2499)" class="w-full mt-4 bg-nflRed text-white py-2 rounded font-bold hover:bg-nflRedDark transition">+ Agregar al Carrito</button>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow border flex flex-col justify-between">
+                        <div>
+                            <img src="img/ravens_p2.jpg" alt="Gorra Ravens" class="w-full h-48 object-cover rounded mb-2">
+                            <h3 class="font-bold text-lg">Gorra Purple Pride</h3>
+                            <p class="text-xl font-extrabold text-nflRed mt-2">$899 MXN</p>
+                        </div>
+                        <button onclick="agregarAlCarrito('Gorra Purple Pride', 899)" class="w-full mt-4 bg-nflRed text-white py-2 rounded font-bold hover:bg-nflRedDark transition">+ Agregar al Carrito</button>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow border flex flex-col justify-between">
+                        <div>
+                            <img src="img/ravens_p3.jpg" alt="Jersey Henry" class="w-full h-48 object-cover rounded mb-2">
+                            <h3 class="font-bold text-lg">Jersey Derrick Henry #22</h3>
+                            <p class="text-xl font-extrabold text-nflRed mt-2">$2,499 MXN</p>
+                        </div>
+                        <button onclick="agregarAlCarrito('Jersey Derrick Henry #22', 2499)" class="w-full mt-4 bg-nflRed text-white py-2 rounded font-bold hover:bg-nflRedDark transition">+ Agregar al Carrito</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NEW ENGLAND PATRIOTS -->
+            <div id="patriots" class="equipo-seccion space-y-4">
+                <h2 class="text-3xl font-black text-nflRed border-b pb-2">Tienda Oficial: New England Patriots</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-4 rounded-lg shadow border flex flex-col justify-between">
+                        <div>
+                            <img src="img/patriots_p1.jpg" alt="Jersey Patriots" class="w-full h-48 object-cover rounded mb-2">
+                            <h3 class="font-bold text-lg">Jersey Drake Maye #10</h3>
+                            <p class="text-xl font-extrabold text-nflRed mt-2">$2,499 MXN</p>
+                        </div>
+                        <button onclick="agregarAlCarrito('Jersey Drake Maye #10', 2499)" class="w-full mt-4 bg-nflRed text-white py-2 rounded font-bold hover:bg-nflRedDark transition">+ Agregar al Carrito</button>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow border flex flex-col justify-between">
+                        <div>
+                            <img src="img/patriots_p2.jpg" alt="Gorra Patriots" class="w-full h-48 object-cover rounded mb-2">
+                            <h3 class="font-bold text-lg">Gorra Navy Blue</h3>
+                            <p class="text-xl font-extrabold text-nflRed mt-2">$899 MXN</p>
+                        </div>
+                        <button onclick="agregarAlCarrito('Gorra Navy Blue', 899)" class="w-full mt-4 bg-nflRed text-white py-2 rounded font-bold hover:bg-nflRedDark transition">+ Agregar al Carrito</button>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow border flex flex-col justify-between">
+                        <div>
+                            <img src="img/patriots_p3.jpg" alt="Sudadera Patriots" class="w-full h-48 object-cover rounded mb-2">
+                            <h3 class="font-bold text-lg">Sudadera Dynasty Hoodie</h3>
+                            <p class="text-xl font-extrabold text-nflRed mt-2">$1,599 MXN</p>
+                        </div>
+                        <button onclick="agregarAlCarrito('Sudadera Dynasty Hoodie', 1599)" class="w-full mt-4 bg-nflRed text-white py-2 rounded font-bold hover:bg-nflRedDark transition">+ Agregar al Carrito</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- FORMULARIO CHECKOUT DE COMPRA -->
+        <section id="checkout-modal" class="hidden max-w-lg mx-auto my-8">
+            <div class="bg-white p-6 rounded-lg shadow-lg border-t-4 border-nflRed">
+                <h2 class="text-2xl font-black text-center text-gray-800 mb-4">FINALIZAR COMPRA</h2>
+                <form onsubmit="event.preventDefault(); alert('¡Gracias por tu compra en NFL Shop!'); vaciarCarrito();" class="space-y-4">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-1">Nombre:</label>
+                            <input type="text" required class="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-nflRed">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-1">Dirección:</label>
+                            <input type="text" required class="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-nflRed">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1">Método de Pago:</label>
+                        <select class="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-nflRed">
+                            <option>Tarjeta de Crédito / Débito</option>
+                            <option>Transferencia SPEI</option>
+                            <option>Pago en OXXO</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="w-full bg-nflRed text-white py-3 rounded-md font-bold hover:bg-nflRedDark transition">Confirmar Venta</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-black text-white text-center py-6 mt-8 border-t-4 border-nflRed">
+        <p class="font-bold text-base tracking-wide">Hernández Heredia Evan Renato</p>
+        <p class="text-sm text-gray-400 mt-1">Grupo: 5-i | No.Control: 0558</p>
+        <p class="text-xs text-gray-500 mt-2">Proyecto Final Submódulo - Sitio Web e Integración SQL</p>
+    </footer>
+
+    <!-- LÓGICA DEL CARRITO Y FILTRADO POR PARAMETRO URL -->
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const equipoSeleccionado = urlParams.get('equipo');
+
+        if (equipoSeleccionado) {
+            const secciones = document.querySelectorAll('.equipo-seccion');
+            secciones.forEach(sec => {
+                if (sec.id !== equipoSeleccionado) {
+                    sec.classList.add('hidden');
+                }
+            });
+        }
+
+        let carrito = [];
+
+        function toggleCarrito() {
+            document.getElementById('sec-carrito').classList.toggle('hidden');
+        }
+
+        function agregarAlCarrito(nombre, precio) {
+            carrito.push({ nombre, precio });
+            actualizarCarrito();
+            document.getElementById('sec-carrito').classList.remove('hidden');
+        }
+
+        function actualizarCarrito() {
+            const lista = document.getElementById('lista-carrito');
+            const cant = document.getElementById('cant-carrito');
+            const totalElem = document.getElementById('total-precio');
+            
+            lista.innerHTML = '';
+            let total = 0;
+
+            if(carrito.length === 0) {
+                lista.innerHTML = `<tr><td colspan="3" class="p-3 text-center text-gray-400">El carrito está vacío</td></tr>`;
+            } else {
+                carrito.forEach((item, index) => {
+                    total += item.precio;
+                    lista.innerHTML += `
+                        <tr>
+                            <td class="p-3 font-semibold">${item.nombre}</td>
+                            <td class="p-3 text-nflRed font-bold">$${item.precio} MXN</td>
+                            <td class="p-3"><button onclick="eliminarDelCarrito(${index})" class="text-red-500 hover:text-red-700"><i class="fas fa-trash"></i></button></td>
+                        </tr>
+                    `;
+                });
+            }
+
+            cant.innerText = carrito.length;
+            totalElem.innerText = `$${total} MXN`;
+        }
+
+        function eliminarDelCarrito(index) {
+            carrito.splice(index, 1);
+            actualizarCarrito();
+        }
+
+        function vaciarCarrito() {
+            carrito = [];
+            actualizarCarrito();
+        }
+
+        function abrirCheckout() {
+            if(carrito.length === 0) {
+                alert('Agrega al menos un producto al carrito primero.');
+                return;
+            }
+            document.getElementById('checkout-modal').classList.remove('hidden');
+            document.getElementById('checkout-modal').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

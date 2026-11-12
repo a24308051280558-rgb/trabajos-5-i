@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFL Store - Cuenta</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        nflRed: '#FF0000',
+                        nflRedDark: '#CC0000',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-100 font-sans text-gray-800 min-h-screen flex flex-col">
+
+    <!-- BARRA DE NAVEGACIÓN -->
+    <nav class="bg-nflRed text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <img src="img/logo.png" alt="Logo NFL Shop" class="w-12 h-12 rounded-full object-cover border-2 border-white bg-white">
+                <span class="font-black text-2xl tracking-wider">NFL SHOP</span>
+            </div>
+            <div class="flex space-x-2 md:space-x-4 text-sm font-semibold">
+                <a href="index.html" class="px-3 py-2 rounded hover:bg-nflRedDark transition">Inicio</a>
+                <a href="equipos.html" class="px-3 py-2 rounded hover:bg-nflRedDark transition">Equipos</a>
+                <a href="cuenta.html" class="px-3 py-2 bg-nflRedDark rounded transition"><i class="fas fa-user mr-1"></i> Cuenta</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="flex-grow max-w-7xl mx-auto p-4 w-full flex justify-center items-center">
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden border-t-4 border-nflRed w-full max-w-md my-8">
+            <!-- PESTAÑAS INTERNAS -->
+            <div class="flex border-b">
+                <button id="btn-tab-login" onclick="cambiarSubTab('sub-login')" class="w-1/2 py-3 text-center font-bold text-nflRed border-b-2 border-nflRed bg-gray-50 transition">Iniciar Sesión</button>
+                <button id="btn-tab-registro" onclick="cambiarSubTab('sub-registro')" class="w-1/2 py-3 text-center font-bold text-gray-500 hover:text-nflRed transition">Registrarse</button>
+            </div>
+
+            <div class="p-6">
+                <!-- FORMULARIO: LOGIN -->
+                <div id="sub-login" class="space-y-4">
+                    <h2 class="text-xl font-black text-center text-gray-800 mb-4">¡BIENVENIDO DE NUEVO!</h2>
+                    <form onsubmit="event.preventDefault(); alert('Iniciando sesión...');" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-1">Correo Electrónico:</label>
+                            <input type="email" required placeholder="usuario@correo.com" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-nflRed">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-1">Contraseña:</label>
+                            <input type="password" required placeholder="••••••••" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-nflRed">
+                        </div>
+                        <button type="submit" class="w-full bg-nflRed text-white py-2 rounded-md font-bold hover:bg-nflRedDark transition">Entrar</button>
+                    </form>
+                </div>
+
+                <!-- FORMULARIO: REGISTRO -->
+                <div id="sub-registro" class="hidden space-y-4">
+                    <h2 class="text-xl font-black text-center text-gray-800 mb-2">CREAR NUEVA CUENTA</h2>
+                    <p class="text-xs text-center text-gray-500 mb-4">Ingresa tus datos para registrarte en la base de datos SQL</p>
+                    
+                    <form onsubmit="event.preventDefault(); alert('Registro guardado exitosamente en la base de datos SQL');" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-1">Nombre Completo:</label>
+                            <input type="text" required placeholder="Evan Renato" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-nflRed">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-1">Correo Electrónico:</label>
+                            <input type="email" required placeholder="correo@ejemplo.com" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-nflRed">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-1">Equipo Favorito:</label>
+                            <select class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-nflRed">
+                                <option value="Chiefs">Kansas City Chiefs</option>
+                                <option value="49ers">San Francisco 49ers</option>
+                                <option value="Cowboys">Dallas Cowboys</option>
+                                <option value="Steelers">Pittsburgh Steelers</option>
+                                <option value="Eagles">Philadelphia Eagles</option>
+                                <option value="Dolphins">Miami Dolphins</option>
+                                <option value="Packers">Green Bay Packers</option>
+                                <option value="Raiders">Las Vegas Raiders</option>
+                                <option value="Ravens">Baltimore Ravens</option>
+                                <option value="Patriots">New England Patriots</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-1">Contraseña:</label>
+                            <input type="password" required placeholder="••••••••" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-nflRed">
+                        </div>
+                        <button type="submit" class="w-full bg-nflRed text-white py-2 rounded-md font-bold hover:bg-nflRedDark transition">Registrar en BD</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-black text-white text-center py-6 mt-8 border-t-4 border-nflRed">
+        <p class="font-bold text-base tracking-wide">Hernández Heredia Evan Renato</p>
+        <p class="text-sm text-gray-400 mt-1">Grupo: 5-i | No.Control: 0558</p>
+        <p class="text-xs text-gray-500 mt-2">Proyecto Final Submódulo - Sitio Web e Integración SQL</p>
+    </footer>
+
+    <!-- JAVASCRIPT INTEGRADO -->
+    <script>
+        function cambiarSubTab(subId) {
+            const loginForm = document.getElementById('sub-login');
+            const registroForm = document.getElementById('sub-registro');
+            const btnLogin = document.getElementById('btn-tab-login');
+            const btnRegistro = document.getElementById('btn-tab-registro');
+
+            if (!loginForm || !registroForm) return;
+
+            loginForm.classList.add('hidden');
+            registroForm.classList.add('hidden');
+            
+            btnLogin.className = "w-1/2 py-3 text-center font-bold text-gray-500 hover:text-nflRed transition";
+            btnRegistro.className = "w-1/2 py-3 text-center font-bold text-gray-500 hover:text-nflRed transition";
+
+            if(subId === 'sub-login') {
+                loginForm.classList.remove('hidden');
+                btnLogin.className = "w-1/2 py-3 text-center font-bold text-nflRed border-b-2 border-nflRed bg-gray-50 transition";
+            } else {
+                registroForm.classList.remove('hidden');
+                btnRegistro.className = "w-1/2 py-3 text-center font-bold text-nflRed border-b-2 border-nflRed bg-gray-50 transition";
+            }
+        }
+    </script>
+</body>
+</html>
